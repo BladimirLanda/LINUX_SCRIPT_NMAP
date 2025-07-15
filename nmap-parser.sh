@@ -12,7 +12,7 @@ nmap_exec () {
     echo "[INFO] executando nmap para la red $1, por favor espere unos segundos..."
     sudo nmap -sV $1 > $2
     echo "[OK] fichero $2 generado correctamente!!"
-    return
+    return 0
 }
 
 nmap_gener () {
@@ -22,6 +22,7 @@ nmap_gener () {
     echo "[INFO] diviendo el archivo salida_nmap.raw"                                                                                                                        
     csplit -f parte_ salida_nmap.raw '/^$/' '{*}' > /dev/null                                                                                                                
     echo "[OK] fichero salida_nmap.raw dividio en los siguientes ficheros: $(ls parte_*)" 
+	return 0
 }
 
 result_parser () {
@@ -42,7 +43,8 @@ result_parser () {
 	      fi                                                                                                                     
 	    echo "</tr>"                                                                                                                                         
 	fi                                                                                                                                                       
-    done   
+    done
+	return 0   
 }
 
 generar_html () {
